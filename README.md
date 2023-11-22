@@ -9,10 +9,14 @@ Projet effectué dans le cadre du cours de développement web de la deuxième an
 - [Clothilde P.](https://github.com/TorielLink)
 
 ## Comment configurer le site
+Installation des dépendances :
 ```sh
 npm install
 ```
-
+Lancement du serveur web : 
+```sh
+npx http-server
+```
 
 ## Languages utilisés
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
