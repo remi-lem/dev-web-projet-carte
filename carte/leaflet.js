@@ -1,5 +1,5 @@
 
-let map = L.map('leafletMap').setView([46.980, 3.779], 6);
+let map = L.map('map').setView([46.980, 3.779], 6);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
