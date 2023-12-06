@@ -7,8 +7,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var trainIcon = L.icon({
     iconUrl: 'images/marqueurs/train.png',
-    iconSize: [38, 95],
+    iconSize:     [26, 32],
+    //iconAnchor:   [22, 94],
+    //popupAnchor:  [-5, -87]
 });
+
+
 
 fetch("data/gares-tgv.geojson")
     .then(function (response) {
@@ -16,9 +20,13 @@ fetch("data/gares-tgv.geojson")
     })
     .then(function (data) {
         L.geoJSON(data, {
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, {
+                    icon: trainIcon
+                });
+            },
             onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.Nom_Gare);
-                layer.icon = trainIcon; //TODO : NE FONCTIONNE PAS
+                layer.bindPopup('<b>' + feature.properties.Nom_Gare + '</b><br>' + " plus d'infos ici");//TODO
             }
         }).addTo(map);
     })

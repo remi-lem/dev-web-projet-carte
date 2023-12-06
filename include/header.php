@@ -32,9 +32,9 @@ global $urlstyle;
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">
-            <img src="images/logos/logoSite.png" alt="Logo">
+            <img src="images/logos/logoSite.png" alt="Logo" width="60" size="60">
             GaresÀVous!
         </a>
-        <a href="user_account.php"><img alt="userAccount" src="images/logos/user.png"></a>
+        <a href="user_account.php"><img alt="userAccount" src="images/logos/user.png" width="60" sizes="60"></a>
     </div>
 </nav>
