@@ -8,7 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 var trainIcon = L.icon({
     iconUrl: 'images/marqueurs/train.png',
     iconSize: [38, 95],
-});             //TODO : VERIFIER QUE CA FONCTIONNE
+});
 
 fetch("data/gares-tgv.geojson")
     .then(function (response) {
@@ -18,7 +18,7 @@ fetch("data/gares-tgv.geojson")
         L.geoJSON(data, {
             onEachFeature: function (feature, layer) {
                 layer.bindPopup(feature.properties.Nom_Gare);
-                layer.icon = trainIcon;
+                layer.icon = trainIcon; //TODO : NE FONCTIONNE PAS
             }
         }).addTo(map);
     })

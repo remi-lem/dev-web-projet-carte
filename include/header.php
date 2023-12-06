@@ -18,8 +18,7 @@ global $urlstyle;
     <link href="style/global.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $urlstyle; ?>" rel="stylesheet">
 
-    <link rel="icon" href="images/logo_favicon.jpg">
-    <script src="javascript/global.js" defer></script>
+    <link rel="icon" href="images/logos/logoSite.png">
 
     <!--bootstrap et leaflet-->
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -32,9 +31,10 @@ global $urlstyle;
 
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="images/logos/logosite.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            Bootstrap
+        <a class="navbar-brand" href="index.php">
+            <img src="images/logos/logoSite.png" alt="Logo">
+            GaresÀVous!
         </a>
+        <a href="user_account.php"><img alt="userAccount" src="images/logos/user.png"></a>
     </div>
 </nav>
