@@ -5,5 +5,7 @@ require_once("include/header.php");
 ?>
 
 <div id="map"></div>
-</body>
-</html>
+
+<?php
+require_once("include/footer.php");
+?>
