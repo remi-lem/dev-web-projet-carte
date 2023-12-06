@@ -17,7 +17,7 @@ fetch("data/gares-tgv.geojson")
     .catch(function (error) {
         console.error('Erreur lors du chargement des données GeoJSON :', error);
     });
-fetch("data/fichier-de-formes-des-voies-du-reseau-ferre-national.geojson")
+fetch("data/lignes-lgv-et-par-ecartement.geojson")
     .then(function (response) {
         return response.json();
     })
