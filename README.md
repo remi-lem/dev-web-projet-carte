@@ -39,4 +39,4 @@ Framework : ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?st
 
 IDE : ![PhpStorm](https://img.shields.io/badge/phpstorm-143?style=for-the-badge&logo=phpstorm&logoColor=black&color=black&labelColor=darkorchid)
 
-Carte : <img src="https://assets.website-files.com/5d3ef00c73102c436bc83996/5d3ef00c73102c1f23c83a2a_logo-reversed.png" alt="LeafletJS" width="90"/>
+Carte : <img src="https://leafletjs.com/docs/images/logo.png" alt="LeafletJS" width="100"/>
