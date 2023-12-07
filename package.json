@@ -18,6 +18,7 @@
   "homepage": "https://github.com/remi-lem/dev-web-projet-carte#readme",
   "dependencies": {
     "bootstrap": "^5.3.2",
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3"
   }
 }

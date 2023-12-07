@@ -21,10 +21,15 @@ global $urlstyle;
     <link rel="icon" href="images/logos/logoSite.png">
 
     <!--bootstrap et leaflet-->
-    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
     <script src="node_modules/leaflet/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+    <script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 </head>
 <body>
 
