@@ -40,6 +40,6 @@ global $urlstyle;
             <img src="images/logos/logoSite.png" alt="Logo" width="60" size="60">
             GaresÀVous!
         </a>
-        <a href="user_account.php"><img alt="userAccount" src="images/logos/user.png" width="60" sizes="60"></a>
+        <a href="user_account.php"><img id="logoAccount" alt="userAccount" src="images/logos/user.png" width="40" sizes="40"></a>
     </div>
 </nav>

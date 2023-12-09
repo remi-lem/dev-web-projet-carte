@@ -1,5 +1,3 @@
-Liens vers les sources de donées originales :
+Liens vers les sources de données originales :
 https://www.data.gouv.fr/fr/datasets/gares-tgv-en-france/
-//TODO trouver comment passer en GeoJson en gardant les accents etc
-
 https://www.data.gouv.fr/fr/datasets/lignes-lgv-et-par-ecartement/
