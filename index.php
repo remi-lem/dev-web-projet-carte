@@ -4,7 +4,7 @@ $urlstyle = "style/index.css";
 require_once("include/header.php");
 ?>
 
-<script src="carte/leaflet.js" defer></script>
+<script src="scripts/leaflet.js" defer></script>
 <div id="mapContainer">
     <div id="map"></div>
 </div>
