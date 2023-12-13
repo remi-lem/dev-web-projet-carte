@@ -9,7 +9,7 @@ const trainIcon = L.icon({
 
 const markers = L.markerClusterGroup();
 
-fetch("data/gares-tgv.geojson")
+fetch("data/liste-des-gares.geojson")
     .then(function (response) {
         return response.json();
     })
@@ -21,9 +21,10 @@ fetch("data/gares-tgv.geojson")
                 });
             },
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<b>' + feature.properties.Nom_Gare + '</b><br>' +
-                    feature.properties.NOM_DEP + ", " + feature.properties.NOM_REG + '<br>' +
-                    "<a href='user_account.php?addFavName=Paris Nord'>Marquer comme favori</a>"//TODO ne marche pas
+                layer.bindPopup('<b>' + feature.properties.libelle + '</b><br>' +
+                    feature.properties.commune + ", " + feature.properties.departemen + '<br>' +
+                    "Fret : " + feature.properties.fret + ", Voyageurs : " + feature.properties.voyageurs + '<br>' +
+                    "<a href='user_account.php?addFavName=Paris Nord'>Marquer comme favori</a>"//TODO pas ecore codé
                 );
             }
         }).addTo(markers);

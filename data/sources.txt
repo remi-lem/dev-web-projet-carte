@@ -1,3 +1,4 @@
-Liens vers les sources de données originales :
-https://www.data.gouv.fr/fr/datasets/gares-tgv-en-france/
+Liens vers les sources de données d'origine :
+https://data.sncf.com/explore/dataset/liste-des-gares/information/
+
 https://www.data.gouv.fr/fr/datasets/lignes-lgv-et-par-ecartement/
