@@ -1,14 +1,14 @@
 <?php
 $titre = "Compte | GareÀVous";
 $urlstyle = "style/account.css";
-require_once("include/header.php"); // TODO : enlever le logo du compte utilisateur
+require_once("include/header.php");
 
-/*
+
 // METTRE CA SEULEMENT POUR LE DEBUG
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-*/
+
 
 $envFilePath = __DIR__ . '/.env';
 $envContent = file_get_contents($envFilePath);
@@ -20,55 +20,43 @@ $password = $envVariables['DB_PASS'];
 $dbname = $envVariables['DB_NAME'];
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+try {
+    $conn = new mysqli($servername, $username, $password, $dbname);
+} catch (mysqli_sql_exception $e) {
+    echo("<p class='alert alert-danger'>impossible de se connecter à la base de données</p>");
+}
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$IdUser = 1; //TODO changer par l'id de l'user qui est connecté
+$_POST['newFavId'] = $_GET['addFavId'] ?? null;
+$newFavId = $_POST['newFavId'];
 
-$sqlUserName = "SELECT U.Name FROM User U WHERE U.Id = $IdUser";
-$resultSqlUserName = $conn->query($sqlUserName);
+$name = $_POST['Name'] ?? null;
+$username = $_POST['Username'] ?? null;
+$password = $_POST['Password'] ?? null;
 
-// Process all rows
-while($row = mysqli_fetch_array($resultSqlUserName)) {
-    $name = $row['Name'];
+if(isset($name)){
+    require_once("include/createAccount.php");
 }
+else {
+    $query = "SELECT U.Id, U.Name, U.Surname, U.Password FROM User U WHERE U.Surname = '$username' AND U.Password = '$password'";
+    $result = $conn->query($query);
 
-$sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
-$resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
-
-$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td></tr></thead><tbody>';
-
-// Process all rows
-while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
-    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td></tr>";
+    if ($result->num_rows > 0) {
+        $IdUser = mysqli_fetch_array($result)['Id'];
+        require_once("include/userConnected.php");
+    } else {
+        if(isset($username)){
+            echo("<p class='alert alert-danger'>Mauvais identifiant/mot de passe</p>");
+        }
+        require_once("include/connection.php");
+    }
 }
-
-$favouriteStationsTable .= "</tbody></table>";
-
-$conn->close();
-
 ?>
-    <div id="congtenu-compte">
-        <h1>Bienvenue <?php echo($name)?> !</h1>
-        <div id="favorite-gare">
-            <h2>Mes gares préférées</h2>
-                <?php echo $favouriteStationsTable ?>
-            <button class="btn-light btn">Ajouter une gare</button>
-        </div>
-        <div id="train-schedule">
-            <h2>Horaire des trains</h2>
-            <ul>
-                <li>TRAIN 1 - Horaire 1</li>
-                <li>TRAIN 2 - Horaire 2</li>
-                <li>TRAIN 3 - Retardé</li>
-                <li>TRAIN 4 - Horaire 4</li>
-            </ul>
-        </div>
-    </div>
+
 
 <?php
 require_once("include/footer.php");
