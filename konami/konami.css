@@ -1,0 +1,29 @@
+.game-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.gameboard {
+    display: inline-block;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+.messages {
+    text-align: center;
+    margin-top: 20px;
+}

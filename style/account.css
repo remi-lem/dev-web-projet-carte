@@ -1,3 +1,24 @@
 #congtenu-compte {
     margin: 20px;
 }
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+table tbody tr td {
+    border: 1px solid;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-item {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}

@@ -24,7 +24,7 @@ fetch("data/liste-des-gares.geojson")
                 layer.bindPopup('<b>' + feature.properties.libelle + '</b><br>' +
                     feature.properties.commune + ", " + feature.properties.departemen + '<br>' +
                     "Fret : " + feature.properties.fret + ", Voyageurs : " + feature.properties.voyageurs + '<br>' +
-                    "<a href='user_account.php?addFavName=Paris Nord'>Marquer comme favori</a>"//TODO pas ecore codé
+                    "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>"
                 );
             }
         }).addTo(markers);
