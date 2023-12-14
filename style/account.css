@@ -1,3 +1,13 @@
 #congtenu-compte {
     margin: 20px;
 }
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+table tbody tr td {
+    border: 1px solid;
+}

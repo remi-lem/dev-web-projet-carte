@@ -27,13 +27,27 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT U.Name FROM User U WHERE U.Id = 1";
-$result = $conn->query($sql);
+$IdUser = 1; //TODO changer par l'id de l'user qui est connecté
+
+$sqlUserName = "SELECT U.Name FROM User U WHERE U.Id = $IdUser";
+$resultSqlUserName = $conn->query($sqlUserName);
 
 // Process all rows
-while($row = mysqli_fetch_array($result)) {
+while($row = mysqli_fetch_array($resultSqlUserName)) {
     $name = $row['Name'];
 }
+
+$sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
+$resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
+
+$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td></tr></thead><tbody>';
+
+// Process all rows
+while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
+    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td></tr>";
+}
+
+$favouriteStationsTable .= "</tbody></table>";
 
 $conn->close();
 
@@ -42,12 +56,7 @@ $conn->close();
         <h1>Bienvenue <?php echo($name)?> !</h1>
         <div id="favorite-gare">
             <h2>Mes gares préférées</h2>
-            <ul>
-                <li>GARE 1</li>
-                <li>GARE 2</li>
-                <li>GARE 3</li>
-                <li>GARE 4</li>
-            </ul>
+                <?php echo $favouriteStationsTable ?>
             <button class="btn-light btn">Ajouter une gare</button>
         </div>
         <div id="train-schedule">
