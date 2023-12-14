@@ -1,9 +1,17 @@
 <?php
-global $conn, $IdUser, $newFavId;
+global $conn, $IdUser;
+
+$newFavId = $_SESSION['newFavId'];
 
 if(isset($newFavId)){
     $sqlAddFavId = "INSERT INTO FavouriteStations(IdUser, IdStation) VALUES ($IdUser, $newFavId)";
-    $conn->query($sqlAddFavId);
+    try{
+        $conn->query($sqlAddFavId);
+        $_SESSION['newFavId'] = null;
+    } catch (mysqli_sql_exception $e){
+        echo("<p class='alert alert-danger'>Cette gare a déja été ajoutée.</p>");
+        $_SESSION['newFavId'] = null;
+    }
 }
 
 $sqlUserName = "SELECT U.Name FROM User U WHERE U.Id = $IdUser";
