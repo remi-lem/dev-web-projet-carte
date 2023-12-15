@@ -28,7 +28,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ftp-remi-lem.alwaysdata.net
-        server-dir: /www/
+        server-dir: /www/public
         username: remi-lem
         password: ${{ secrets.ALW_FTP_PASS }}
         exclude: |
