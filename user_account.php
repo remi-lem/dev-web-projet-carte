@@ -36,6 +36,12 @@ if(isset($_GET['addFavId'])){
     $_SESSION['newFavId'] = $_GET['addFavId'] ?? null;
 }
 
+if(isset($_GET['removeFavId'])){
+    $_SESSION['removeFavId'] = $_GET['addFavId'] ?? null;
+}
+
+var_dump($_SESSION['removeFavId']);
+
 $name = $_POST['Name'] ?? null;
 $username = $_POST['Username'] ?? null;
 $password = $_POST['Password'] ?? null;

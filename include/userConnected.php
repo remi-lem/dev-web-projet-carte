@@ -3,6 +3,8 @@ global $conn, $IdUser;
 
 $newFavId = $_SESSION['newFavId'];
 
+$removeFavId = $_SESSION['removeFavId'];
+
 if(isset($newFavId)){
     $sqlAddFavId = "INSERT INTO FavouriteStations(IdUser, IdStation) VALUES ($IdUser, $newFavId)";
     try{
@@ -11,6 +13,17 @@ if(isset($newFavId)){
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Cette gare a déja été ajoutée.</p>");
         $_SESSION['newFavId'] = null;
+    }
+}
+
+if(isset($removeFavId)){
+    $sqlRmFavId = "DELETE FROM FavouriteStations F WHERE F.IdStation = $removeFavId";
+    try{
+        $conn->query($sqlRmFavId);
+        $_SESSION['removeFavId'] = null;
+    } catch (mysqli_sql_exception $e){
+        echo("<p class='alert alert-danger'>Impossible de supprimer cette gare</p>");
+        $_SESSION['removeFavId'] = null;
     }
 }
 
@@ -29,7 +42,7 @@ $favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td></tr></th
 
 // Process all rows
 while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
-    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td></tr>";
+    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td><td><a href='user_account.php?removeFavId=" . $row["IdStation"] . "'>Supprimer</a></td></tr>";
     //TODO : mettre les noms des stations
 }
 
