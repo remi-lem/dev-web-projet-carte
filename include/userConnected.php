@@ -38,7 +38,7 @@ while($row = mysqli_fetch_array($resultSqlUserName)) {
 $sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
 $resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
 
-$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td></tr></thead><tbody>';
+$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td><td>Supression</td></tr></thead><tbody>';
 
 // Process all rows
 while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
@@ -69,6 +69,9 @@ $conn->close();
         </ul>
     </div>
     <div id="logout">
-        <a href="user_account.php?logout=true" class="btn btn-dark" id="btn-disconnection">Se déconnecter</a>
+        <a href="user_account.php?logout=true" class="btn btn-outline-danger" id="btn-logout">Se déconnecter</a>
+    </div>
+    <div id="delete-account">
+        <a href="user_account.php?delete-account=true" class="btn btn-danger" id="btn-rm-account">Supprimer son compte</a>
     </div>
 </div>

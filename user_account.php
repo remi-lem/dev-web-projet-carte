@@ -16,14 +16,14 @@ $envFilePath = __DIR__ . '/.env';
 $envContent = file_get_contents($envFilePath);
 $envVariables = parse_ini_string($envContent);
 
-$servername = $envVariables['DB_SERV'];
-$username = $envVariables['DB_USER'];
-$password = $envVariables['DB_PASS'];
-$dbname = $envVariables['DB_NAME'];
+$servernameDB = $envVariables['DB_SERV'];
+$usernameDB = $envVariables['DB_USER'];
+$passwordDB = $envVariables['DB_PASS'];
+$nameDB = $envVariables['DB_NAME'];
 
 // Create connection
 try {
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servernameDB, $usernameDB, $passwordDB, $nameDB);
 } catch (mysqli_sql_exception $e) {
     echo("<p class='alert alert-danger'>impossible de se connecter à la base de données</p>");
 }
@@ -34,6 +34,18 @@ if ($conn->connect_error) {
 }
 
 if(isset($_GET['logout'])){
+    $_SESSION = array();
+}
+
+if(isset($_GET['delete-account'])){
+    $usernameDel = $_SESSION['Username'] ?? null;
+    $delAccount = "DELETE FROM User WHERE User.Id = (SELECT User.Id FROM User WHERE User.Surname = '$usernameDel')";
+    try {
+        $result = $conn->query($delAccount);
+        echo("<p class='alert alert-success'>Compte supprimé avec succès</p>");
+    } catch (mysqli_sql_exception $e){
+        echo("<p class='alert alert-danger'>Impossible de supprimer ce compte</p>");
+    }
     $_SESSION = array();
 }
 

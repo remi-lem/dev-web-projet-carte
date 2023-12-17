@@ -8,8 +8,9 @@ table {
     border: 1px solid;
 }
 
-table tbody tr td {
+table td {
     border: 1px solid;
+    padding: 4px;
 }
 
 .flex-container {
