@@ -32,19 +32,29 @@ try {
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+if(isset($_GET['logout'])){
+    $_SESSION = array();
+}
+
 if(isset($_GET['addFavId'])){
-    $_SESSION['newFavId'] = $_GET['addFavId'] ?? null;
+    $_SESSION['newFavId'] = $_GET['addFavId'];
 }
 
 if(isset($_GET['removeFavId'])){
-    $_SESSION['removeFavId'] = $_GET['addFavId'] ?? null;
+    $_SESSION['removeFavId'] = $_GET['removeFavId'];
+}
+if(isset($_POST['Username'])){
+    $_SESSION['Username'] = $_POST['Username'];
+}
+if(isset($_POST['Password'])){
+    $_SESSION['Password'] = $_POST['Password'];
 }
 
-var_dump($_SESSION['removeFavId']);
 
 $name = $_POST['Name'] ?? null;
-$username = $_POST['Username'] ?? null;
-$password = $_POST['Password'] ?? null;
+$username = $_SESSION['Username'] ?? null;
+$password = $_SESSION['Password'] ?? null;
 
 if(isset($name)){
     $addAccount = "INSERT INTO User(Name, Surname, Password) VALUES ('$name', '$username', '$password')";

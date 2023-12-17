@@ -1,9 +1,9 @@
 <?php
 global $conn, $IdUser;
 
-$newFavId = $_SESSION['newFavId'];
+$newFavId = $_SESSION['newFavId'] ?? null;
 
-$removeFavId = $_SESSION['removeFavId'];
+$removeFavId = $_SESSION['removeFavId'] ?? null;
 
 if(isset($newFavId)){
     $sqlAddFavId = "INSERT INTO FavouriteStations(IdUser, IdStation) VALUES ($IdUser, $newFavId)";
@@ -17,7 +17,7 @@ if(isset($newFavId)){
 }
 
 if(isset($removeFavId)){
-    $sqlRmFavId = "DELETE FROM FavouriteStations F WHERE F.IdStation = $removeFavId";
+    $sqlRmFavId = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = $removeFavId";
     try{
         $conn->query($sqlRmFavId);
         $_SESSION['removeFavId'] = null;
@@ -67,5 +67,8 @@ $conn->close();
             <li>TRAIN 3 - Retardé</li>
             <li>TRAIN 4 - Horaire 4</li>
         </ul>
+    </div>
+    <div id="logout">
+        <a href="user_account.php?logout=true" class="btn btn-dark" id="btn-disconnection">Se déconnecter</a>
     </div>
 </div>
