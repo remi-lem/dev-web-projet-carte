@@ -11,11 +11,9 @@ Projet effectué dans le cadre du cours de développement web de la deuxième an
 ## Comment configurer le site
 Installation des dépendances :
 ```sh
-npm install
+composer install
 ```
-[comment]: <> ( TODO : verifier ca)
-
-Lancement du serveur web :
+Lancement :
 ```sh
 symfony serve
 ```
@@ -36,6 +34,8 @@ Hébergement : ![OVH](https://img.shields.io/badge/ovh-%23123F6D.svg?style=for-t
 
 Travail collaboratif : ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white), ![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white) et ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
 
-Framework : ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white) et ![Symfony](https://img.shields.io/badge/symfony-%23000000.svg?style=for-the-badge&logo=symfony&logoColor=white)
+Framework web : ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+Framework PHP : ![Symfony](https://img.shields.io/badge/symfony-%23000000.svg?style=for-the-badge&logo=symfony&logoColor=white)
 
 Carte : <img src="https://leafletjs.com/docs/images/logo.png" alt="LeafletJS" width="100"/>
