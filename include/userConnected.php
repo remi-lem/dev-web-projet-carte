@@ -17,7 +17,7 @@ if(isset($newFavId)){
 }
 
 if(isset($removeFavId)){
-    $sqlRmFavId = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = $removeFavId";
+    $sqlRmFavId = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = $removeFavId AND FavouriteStations.IdUser = $IdUser";
     try{
         $conn->query($sqlRmFavId);
         $_SESSION['removeFavId'] = null;

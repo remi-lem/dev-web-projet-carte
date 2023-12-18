@@ -38,10 +38,12 @@ if(isset($_GET['logout'])){
 }
 
 if(isset($_GET['delete-account'])){
-    $usernameDel = $_SESSION['Username'] ?? null;
+    $usernameDel = $_SESSION['Username'];
+    $delFavStation = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdUser = (SELECT User.Id FROM User WHERE User.Surname = '$usernameDel')";
     $delAccount = "DELETE FROM User WHERE User.Id = (SELECT User.Id FROM User WHERE User.Surname = '$usernameDel')";
     try {
-        $result = $conn->query($delAccount);
+        $conn->query($delFavStation);
+        $conn->query($delAccount);
         echo("<p class='alert alert-success'>Compte supprimé avec succès</p>");
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Impossible de supprimer ce compte</p>");
