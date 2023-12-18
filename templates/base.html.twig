@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <link href="{{ asset("styles/global.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ cssFile }}" rel="stylesheet">
+
+    <link rel="icon" href="{{ asset("images/logos/logoSite.png") }}">
+
+    <script src="{{ asset("konami/autrechose.js") }}"></script>
+    {% block javascript %}
+    {% endblock %}
+
+    <!--bootstrap et leaflet-->
+    <link rel="stylesheet" href="{{ asset('dependencies/bootstrap/bootstrap.min.css') }}">
+    <script src="{{ asset('dependencies/bootstrap/bootstrap.min.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('dependencies/leaflet/leaflet.css') }}">
+    <script src="{{ asset('dependencies/leaflet/leaflet.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('dependencies/markercluster/MarkerCluster.css') }}">
+    <link rel="stylesheet" href="{{ asset('dependencies/markercluster/MarkerCluster.Default.css') }}">
+    <script src="{{ asset('dependencies/markercluster/leaflet.markercluster.js') }}"></script>
+
+</head>
+<body>
+
+
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">
+            <img src="images/logos/logoSite.png" alt="Logo" width="60" height="60">
+            GaresÀVous!
+        </a>
+        <a href="user_account.php"><img id="logoAccount" alt="userAccount" src="images/logos/user.png" width="40" height="40"></a>
+    </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">GaresÀVous</p>
+
+        <a href="index.php" class="col-md-4 d-flex align-items-center justify-content-center
+            mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <img src="{{ asset("images/logos/logoSite.png") }}" class="bi me-2" alt="Logo" width="50" height="50">
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Accueil</a></li>
+            <li class="nav-item"><a href="user_account.php" class="nav-link px-2 text-muted">Compte</a></li>
+        </ul>
+    </footer>
+</div>
+</body>
+</html>

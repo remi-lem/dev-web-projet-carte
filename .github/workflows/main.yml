@@ -1,4 +1,4 @@
-name: 🚀 Deploy website on push & update npm
+name: 🚀 Deploy website on push
 
 on:
   push:
@@ -12,25 +12,16 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Update npm packages
-      run: npm update
     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ftp-remi-lem.alwaysdata.net
-        server-dir: /www/public/
+        server-dir: /www/
         username: remi-lem
         password: ${{ secrets.ALW_FTP_PASS }}
         exclude: |
           **/.git*
           **/.git*/**
+          **/vendor/**
+          **/var/**

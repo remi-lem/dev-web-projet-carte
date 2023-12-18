@@ -1,7 +1,9 @@
 <?php
 global $conn, $IdUser;
 
-$newFavId = $_SESSION['newFavId'];
+$newFavId = $_SESSION['newFavId'] ?? null;
+
+$removeFavId = $_SESSION['removeFavId'] ?? null;
 
 if(isset($newFavId)){
     $sqlAddFavId = "INSERT INTO FavouriteStations(IdUser, IdStation) VALUES ($IdUser, $newFavId)";
@@ -11,6 +13,17 @@ if(isset($newFavId)){
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Cette gare a déja été ajoutée.</p>");
         $_SESSION['newFavId'] = null;
+    }
+}
+
+if(isset($removeFavId)){
+    $sqlRmFavId = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = $removeFavId AND FavouriteStations.IdUser = $IdUser";
+    try{
+        $conn->query($sqlRmFavId);
+        $_SESSION['removeFavId'] = null;
+    } catch (mysqli_sql_exception $e){
+        echo("<p class='alert alert-danger'>Impossible de supprimer cette gare</p>");
+        $_SESSION['removeFavId'] = null;
     }
 }
 
@@ -25,11 +38,11 @@ while($row = mysqli_fetch_array($resultSqlUserName)) {
 $sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
 $resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
 
-$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td></tr></thead><tbody>';
+$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td><td>Supression</td></tr></thead><tbody>';
 
 // Process all rows
 while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
-    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td></tr>";
+    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td><td><a href='user_account.php?removeFavId=" . $row["IdStation"] . "'>Supprimer</a></td></tr>";
     //TODO : mettre les noms des stations
 }
 
@@ -54,5 +67,11 @@ $conn->close();
             <li>TRAIN 3 - Retardé</li>
             <li>TRAIN 4 - Horaire 4</li>
         </ul>
+    </div>
+    <div id="logout">
+        <a href="user_account.php?logout=true" class="btn btn-outline-danger" id="btn-logout">Se déconnecter</a>
+    </div>
+    <div id="delete-account">
+        <a href="user_account.php?delete-account=true" class="btn btn-danger" id="btn-rm-account">Supprimer son compte</a>
     </div>
 </div>

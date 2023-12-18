@@ -27,7 +27,7 @@ function testCombinaison(){
 }
 
 function windowChanges(){
-    window.location.href = 'konami.php';
+    window.location.href = 'konami';
 }
 
 function majTab(e) {
