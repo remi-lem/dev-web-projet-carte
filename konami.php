@@ -6,7 +6,7 @@ require_once("include/header.php");
 
 <script src="konami/konami.js" defer></script>
 
-<<div class="content konami-game">
+<div class="content konami-game">
     <h1>Bataille navale</h1>
     <div class="game-container">
         <div class="gameboard">
