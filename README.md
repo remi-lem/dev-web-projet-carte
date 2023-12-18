@@ -13,9 +13,11 @@ Installation des dépendances :
 ```sh
 npm install
 ```
+[comment]: <> ( TODO : verifier ca)
+
 Lancement du serveur web :
 ```sh
-npx http-server
+symfony serve
 ```
 
 ## Languages utilisés

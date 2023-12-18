@@ -1,6 +1,6 @@
 <?php
 $titre = "Compte | GareÀVous";
-$urlstyle = "style/account.css";
+$urlstyle = "styles/account.css";
 require_once("include/header.php");
 
 session_start();

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ asset('scripts/leaflet.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div id="mapContainer">
+        <div id="map"></div>
+    </div>
+{% endblock %}
