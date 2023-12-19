@@ -72,6 +72,22 @@ $conn->close();
         <a href="user_account.php?logout=true" class="btn btn-outline-danger" id="btn-logout">Se déconnecter</a>
     </div>
     <div id="delete-account">
-        <a href="user_account.php?delete-account=true" class="btn btn-danger" id="btn-rm-account">Supprimer son compte</a>
+        <button type="button" class="btn btn-primary btn-danger" onclick="showConfirmationDialog()">
+            Supprimer mon compte
+        </button>
     </div>
+    <div id="confirmationDialog" class="alert alert-danger" role="alert">
+        <p>Êtes-vous sûr de vouloir supprimer votre compte, et toutes les données associées ?</p>
+        <button type="button" class="btn btn-secondary" onclick="cancelDeletion()">Annuler</button>
+        <a href="user_account.php?delete-account=true" class="btn btn-primary btn-danger" id="btn-rm-account">Confirmer</a>
+    </div>
+    <script>
+        function showConfirmationDialog() {
+            document.getElementById('confirmationDialog').style.display = 'block';
+        }
+
+        function cancelDeletion() {
+            document.getElementById('confirmationDialog').style.display = 'none';
+        }
+    </script>
 </div>
