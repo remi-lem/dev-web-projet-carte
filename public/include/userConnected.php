@@ -38,12 +38,24 @@ while($row = mysqli_fetch_array($resultSqlUserName)) {
 $sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
 $resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
 
-$favouriteStationsTable = '<table><thead><tr><td>Nom de la station</td><td>Supression</td></tr></thead><tbody>';
+$favouriteStationsTable = '<table class="table"><thead><tr><th scope="col">Nom de la station</th><th scope="col">Supression</th><th scope="col">Voir les prochains départs</th></tr></thead><tbody>';
 
-// Process all rows
+$geojson_data = file_get_contents("data/liste-des-gares.geojson");
+$geojson = json_decode($geojson_data, true);
+
 while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
-    $favouriteStationsTable .= "<tr><td>" . $row["IdStation"] . "</td><td><a href='user_account.php?removeFavId=" . $row["IdStation"] . "'>Supprimer</a></td></tr>";
-    //TODO : mettre les noms des stations
+    $stationShowName = $row["IdStation"];
+    foreach ($geojson['features'] as $feature) {
+        $properties = $feature['properties'];
+        $code_uic = $properties['code_uic'];
+        if ($code_uic === $row["IdStation"]) {
+            $stationShowName = $properties['libelle'];
+            break;
+        }
+    }
+    $getNextDeparturesURL = "https://www.sncf.com/fr/gares/details/OCE" . $row["IdStation"] . "/departs-arrivees/gl/departs";
+    $favouriteStationsTable .= "<tr><td>" . $stationShowName . "</td><td><a href='user_account.php?removeFavId=" .
+        $row["IdStation"] . "'>Supprimer</a></td><td><a href='$getNextDeparturesURL' target='_blank'>Prochains départs</a></td></tr>";
 }
 
 $favouriteStationsTable .= "</tbody></table>";
@@ -51,27 +63,15 @@ $favouriteStationsTable .= "</tbody></table>";
 $conn->close();
 
 ?>
-<div id="congtenu-compte">
+<div id="contenu-compte">
     <h1>Bienvenue <?php echo($name)?> !</h1>
     <div id="favorite-gare">
         <h2>Mes gares préférées</h2>
         <?php echo $favouriteStationsTable ?>
-        <p>Pour ajouter une gare à vos favoris, allez sur <a href="index.php">la carte</a></p>
+        <p>Pour ajouter une gare à vos favoris, allez sur <a href="index.php">la carte</a>.</p>
     </div>
-    <div id="train-schedule">
-        <h2>Horaire des trains</h2>
-        <ul>
-            <!--TODO-->
-            <li>TRAIN 1 - Horaire 1</li>
-            <li>TRAIN 2 - Horaire 2</li>
-            <li>TRAIN 3 - Retardé</li>
-            <li>TRAIN 4 - Horaire 4</li>
-        </ul>
-    </div>
-    <div id="logout">
+    <div id="gestionCompte">
         <a href="user_account.php?logout=true" class="btn btn-outline-danger" id="btn-logout">Se déconnecter</a>
-    </div>
-    <div id="delete-account">
         <button type="button" class="btn btn-primary btn-danger" onclick="showConfirmationDialog()">
             Supprimer mon compte
         </button>

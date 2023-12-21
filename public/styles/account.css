@@ -1,16 +1,5 @@
-#congtenu-compte {
+#contenu-compte {
     margin: 20px;
-}
-
-table {
-    table-layout: fixed;
-    border-collapse: collapse;
-    border: 1px solid;
-}
-
-table td {
-    border: 1px solid;
-    padding: 4px;
 }
 
 .flex-container {
