@@ -6,7 +6,7 @@ ini_set('display_errors', '1')
 ini_set('display_startup_errors', '1')
 error_reporting(E_ALL)
 
-{% set envFilePath, envContent, envVariables = ~ '/.env', file_get_contents(envFilePath), parse_ini_string(envContent) %}
+{% set envFilePath, envContent, envVariables = relative_path('~/.env'), file_get_contents(envFilePath), parse_ini_string(envContent) %}
 
 {% set servernameDB, usernameDB, passwordDB, nameDB =
     envVariables.DB_SERV, envVariables.DB_USER, envVariables.DB_PASS, envVariables.DB_NAME %}
