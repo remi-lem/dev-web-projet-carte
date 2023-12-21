@@ -25,10 +25,4 @@ class MapController Extends AbstractController
             'cssFile' => 'konami/konami.css'
         ]);
     }
-
-    #[Route('/userTest')]
-    public function user():Response
-    {
-        return $this->render('map/user-account.html.twig');
-    }
 }
