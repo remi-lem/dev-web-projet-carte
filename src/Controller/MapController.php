@@ -12,7 +12,7 @@ class MapController Extends AbstractController
     public function homepage(): Response
     {
         return $this->render('map/homepage.html.twig', [
-            'title' => 'Accueil | GaresÀVous', //TODO passer en objet ? (methode pour la classe)
+            'title' => 'Accueil | GaresÀVous',
             'cssFile' => 'styles/index.css'
         ]);
     }
@@ -21,7 +21,7 @@ class MapController Extends AbstractController
     public function konami():Response
     {
         return $this->render('map/konami.html.twig', [
-            'title' => 'Konami | GaresÀVous', //TODO passer en objet ? (methode pour la classe)
+            'title' => 'Konami | GaresÀVous',
             'cssFile' => 'konami/konami.css'
         ]);
     }

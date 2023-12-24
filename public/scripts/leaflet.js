@@ -45,3 +45,13 @@ fetch("data/lignes-lgv-et-par-ecartement.geojson")
     .catch(function (error) {
         console.error('Erreur lors du chargement des données GeoJSON :', error);
     });
+
+
+//TODO : avancer sur l'automatisation des routes + obliger a passer par les voies de chemin de fer
+L.Routing.control({
+    waypoints: [
+        L.latLng(48.92078365152306, 2.1846347887831916),
+        L.latLng(48.88731358907528, 2.1715467466022713)
+    ],
+    routeWhileDragging: false
+}).addTo(map);
