@@ -17,13 +17,14 @@ fetch("data/liste-des-gares.geojson")
         L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
                 return L.marker(latlng, {
-                    icon: trainIcon
+                    icon: trainIcon,
+                    title: feature.properties.libelle
                 });
             },
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<b>' + feature.properties.libelle + '</b><br>' +
                     feature.properties.commune + ", " + feature.properties.departemen + '<br>' +
-                    "Fret : " + feature.properties.fret + ", Voyageurs : " + feature.properties.voyageurs + '<br>' +
+                    "Fret : " + feature.properties.fret + ", Voyageurs : " + feature.properties.voyageurs + '<br>' + //TODO incomprehensible
                     "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>"
                 );
             }
@@ -47,6 +48,20 @@ fetch("data/lignes-lgv-et-par-ecartement.geojson")
     });
 
 
+let controlSearch = new L.Control.Search({
+    position:'topleft',
+    layer: markers,
+    initial: false,
+    marker: false,
+    moveToLocation: function (latlng, title, map) {
+        map.setView(latlng, 18);
+        latlng.layer.openPopup();
+    }
+});
+
+map.addControl( controlSearch );
+
+/*
 //TODO : avancer sur l'automatisation des routes + obliger a passer par les voies de chemin de fer
 L.Routing.control({
     waypoints: [
@@ -55,3 +70,4 @@ L.Routing.control({
     ],
     routeWhileDragging: false
 }).addTo(map);
+*/
