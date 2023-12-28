@@ -8,6 +8,32 @@
 <script src="scripts/leaflet.js" defer></script>
 {% endblock %}
 
+{% block homeJS %}
+    <script>
+        address = {{ address|json_encode()|raw() }};
+        if(address !== null){
+            $.ajax({
+                type: "GET",
+                url: 'https://nominatim.openstreetmap.org/search?layer=address&limit=1&format=json&q=' + address,
+                success: function (data) {
+                    if(data.length > 0){
+                        const lat = data[0].lat;
+                        const lon = data[0].lon;
+                        L.marker([lat, lon],{icon: houseIcon}).bindPopup("Domicile").addTo(map);
+                        console.log("domicile ajouté")
+                    }
+                    else{
+                        console.log("domicile non trouvé")
+                    }
+                },
+                error: function() {
+                    console.error("Impossible de récupérer les données Nominatim");
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
 {% block content %}
     <div id="mapContainer">
         <div id="map"></div>

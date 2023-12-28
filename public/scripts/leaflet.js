@@ -1,10 +1,19 @@
-let map = L.map('map', {minZoom: 5}).setView([46.980, 3.779], 6);
+let map = L.map('map', {minZoom: 5}).setView([46.603354, 1.8883335], 6);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 const trainIcon = L.icon({
     iconUrl: 'images/marqueurs/train.png',
     iconSize: [26, 32],
+    iconAnchor: [13, 32],
+    popupAnchor: [0, -29]
+});
+
+const houseIcon = L.icon({
+    iconUrl: 'images/marqueurs/house.png',
+    iconSize: [26, 38],
+    iconAnchor: [13, 38],
+    popupAnchor: [0, -34]
 });
 
 const markers = L.markerClusterGroup();
@@ -82,7 +91,7 @@ let controlSearch = new L.Control.Search({
 map.addControl( controlSearch );
 
 /*
-//TODO : avancer sur l'automatisation des routes + obliger a passer par les voies de chemin de fer
+//TODO : faire une route entre domicile et une gare
 L.Routing.control({
     waypoints: [
         L.latLng(48.92078365152306, 2.1846347887831916),

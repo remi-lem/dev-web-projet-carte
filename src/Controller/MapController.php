@@ -13,7 +13,8 @@ class MapController Extends AbstractController
     {
         return $this->render('map/homepage.html.twig', [
             'title' => 'Accueil | GaresÀVous',
-            'cssFile' => 'styles/index.css'
+            'cssFile' => 'styles/index.css',
+            'address' => $_SESSION['address'] ?? "IUT Paris Rives de Seine" //TODO
         ]);
     }
 

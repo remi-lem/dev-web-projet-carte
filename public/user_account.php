@@ -6,7 +6,7 @@ require_once("include/header.php");
 session_start();
 
 
-// METTRE CA SEULEMENT POUR LE DEBUG
+// TODO : METTRE CA SEULEMENT POUR LE DEBUG
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
@@ -63,6 +63,10 @@ if(isset($_POST['Username'])){
 }
 if(isset($_POST['Password'])){
     $_SESSION['Password'] = $_POST['Password'];
+}
+if(isset($_POST['newAddress'])){
+    $_SESSION['newAddress'] = $_POST['newAddress'];
+    $_POST['newAddress'] = null;
 }
 
 

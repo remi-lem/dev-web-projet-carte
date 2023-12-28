@@ -5,6 +5,7 @@ $newFavId = $_SESSION['newFavId'] ?? null;
 
 $removeFavId = $_SESSION['removeFavId'] ?? null;
 
+//ajout de gare favorite
 if(isset($newFavId)){
     $sqlAddFavId = "INSERT INTO FavouriteStations(IdUser, IdStation) VALUES ($IdUser, $newFavId)";
     try{
@@ -16,6 +17,7 @@ if(isset($newFavId)){
     }
 }
 
+//supression de gare favorite
 if(isset($removeFavId)){
     $sqlRmFavId = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = $removeFavId AND FavouriteStations.IdUser = $IdUser";
     try{
@@ -27,14 +29,15 @@ if(isset($removeFavId)){
     }
 }
 
+//récupération du nom d'utilisateur
 $sqlUserName = "SELECT U.Name FROM User U WHERE U.Id = $IdUser";
 $resultSqlUserName = $conn->query($sqlUserName);
 
-// Process all rows
 while($row = mysqli_fetch_array($resultSqlUserName)) {
     $name = $row['Name'];
 }
 
+//construction du tableau des gares favorites
 $sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
 $resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
 
@@ -60,6 +63,31 @@ while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
 
 $favouriteStationsTable .= "</tbody></table>";
 
+//mise à jour de l'adresse
+$newAddress = $_SESSION['newAddress'];
+if(isset($newAddress) && $newAddress !== ""){
+    $_SESSION['newAddress'] = null;
+    $sqlUpdateAddress = "UPDATE User U SET U.Address = '$newAddress' WHERE U.Id = $IdUser";
+    try {
+        $result = $conn->query($sqlUpdateAddress);
+        echo("<p class='alert alert-success'>Adresse modifiée !</p>");
+    } catch (mysqli_sql_exception $e){
+        echo("<p class='alert alert-danger'>Impossible de mettre a jour l'adresse.</p>");
+    }
+}
+
+//récupération de l'adresse de l'utilisateur
+$address = "";
+$sqlAdress = "SELECT U.Address FROM User U WHERE U.Id = $IdUser";
+$resultSqlAdress = $conn->query($sqlAdress);
+while($row = mysqli_fetch_array($resultSqlAdress)) {
+    $address = $row['Address'];
+}
+if($address == ""){
+    $address = "Aucune adresse définie";
+}
+
+//fermeture de la connection
 $conn->close();
 
 ?>
@@ -69,6 +97,16 @@ $conn->close();
         <h2>Mes gares préférées</h2>
         <?php echo $favouriteStationsTable ?>
         <p>Pour ajouter une gare à vos favoris, allez sur <a href="index.php">la carte</a>.</p>
+    </div>
+    <div id="home">
+        <h2>Mon domicile</h2>
+        <div class="mb-3 col-md-7 col-lg-6">
+            <form action="user_account.php" method="post">
+                <label for="newAddress">Adresse :</label>
+                <input id="newAddress" name="newAddress" type="text" class="form-control" placeholder="<?php echo($address)?>">
+                <button class="btn btn-outline-secondary" type="submit">Modifier</button>
+            </form>
+        </div>
     </div>
     <div id="gestionCompte">
         <a href="user_account.php?logout=true" class="btn btn-outline-danger" id="btn-logout">Se déconnecter</a>
