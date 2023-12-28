@@ -1,16 +1,5 @@
-#congtenu-compte {
+#contenu-compte {
     margin: 20px;
-}
-
-table {
-    table-layout: fixed;
-    border-collapse: collapse;
-    border: 1px solid;
-}
-
-table td {
-    border: 1px solid;
-    padding: 4px;
 }
 
 .flex-container {
@@ -22,4 +11,13 @@ table td {
     margin: 10px;
     padding: 20px;
     border: 1px solid #ccc;
+}
+
+#confirmationDialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
 }

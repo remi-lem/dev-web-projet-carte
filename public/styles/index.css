@@ -1,3 +1,11 @@
 #map {
     height: 85vh;
 }
+
+.leaflet-control-search .search-input, .leaflet-control-search .search-tooltip .search-tip {
+    font-size: 1.5em;
+}
+
+.leaflet-control-search .search-tooltip {
+    max-height: 250px !important;
+}

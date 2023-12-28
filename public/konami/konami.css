@@ -15,15 +15,19 @@ table {
 td {
     width: 30px;
     height: 30px;
-    border: 1px solid black;
+    border: 2px solid black !important;
     cursor: pointer;
-}
-
-td:not(:last-child) {
-    border-right: 1px solid black;
 }
 
 .messages {
     text-align: center;
     margin-top: 20px;
 }
+
+.miss {
+    background-color: gray;
+}
+.hit {
+    background-color: rgb(228, 23, 23);
+}
+

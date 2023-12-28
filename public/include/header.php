@@ -15,7 +15,7 @@ global $urlstyle;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $titre; ?></title>
 
-    <link href="style/global.css" rel="stylesheet" type="text/css">
+    <link href="styles/global.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $urlstyle; ?>" rel="stylesheet">
 
     <link rel="icon" href="images/logos/logoSite.png">
