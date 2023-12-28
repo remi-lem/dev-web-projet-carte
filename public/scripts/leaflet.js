@@ -9,6 +9,26 @@ const trainIcon = L.icon({
 
 const markers = L.markerClusterGroup();
 
+function FretOrVoyageurs(feature) {
+    if(feature.properties.fret === 'O' && feature.properties.voyageurs === 'N'){
+        return "Fret uniquement";
+    }
+    else if(feature.properties.fret === 'N' && feature.properties.voyageurs === 'O'){
+        return "Voyageurs uniquement";
+    }
+    else if(feature.properties.fret === 'O' && feature.properties.voyageurs === 'O'){
+        return "Fret et Voyageurs";
+    }
+    else if(feature.properties.fret === 'N' && feature.properties.voyageurs === 'N'){
+        console.log("Erreur à la fonction FretOrVoyageurs : gare fantôme")
+        return "Ni Fret ni Voyageurs";
+    }
+    else {
+        console.log("Erreur à la fonction FretOrVoyageurs : gare avec des propriétés non renseignées")
+        return "";
+    }
+}
+
 fetch("data/liste-des-gares.geojson")
     .then(function (response) {
         return response.json();
@@ -24,7 +44,7 @@ fetch("data/liste-des-gares.geojson")
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<b>' + feature.properties.libelle + '</b><br>' +
                     feature.properties.commune + ", " + feature.properties.departemen + '<br>' +
-                    "Fret : " + feature.properties.fret + ", Voyageurs : " + feature.properties.voyageurs + '<br>' + //TODO incomprehensible
+                    FretOrVoyageurs(feature) + '<br>' +
                     "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>"
                 );
             }
