@@ -5,12 +5,12 @@ require_once("include/header.php");
 
 session_start();
 
-
-// TODO : METTRE CA SEULEMENT POUR LE DEBUG
+/*
+//uncomment only fr debbuging
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
+*/
 
 $envFilePath = __DIR__ . '/.env';
 $envContent = file_get_contents($envFilePath);
