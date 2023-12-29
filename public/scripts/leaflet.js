@@ -1,6 +1,8 @@
 let map = L.map('map', {minZoom: 5}).setView([46.603354, 1.8883335], 6);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
 const trainIcon = L.icon({
     iconUrl: 'images/marqueurs/train.png',
@@ -54,7 +56,8 @@ fetch("data/liste-des-gares.geojson")
                 layer.bindPopup('<b>' + feature.properties.libelle + '</b><br>' +
                     feature.properties.commune + ", " + feature.properties.departemen + '<br>' +
                     FretOrVoyageurs(feature) + '<br>' +
-                    "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>"
+                    "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>" + '<br>' +
+                    `<a class='calculItineraire' onclick='calculateRoute(${feature.properties.c_geo.lat}, ${feature.properties.c_geo.lon})'>Calculer l'itinéraire</a>`
                 );
             }
         }).addTo(markers);
@@ -90,13 +93,9 @@ let controlSearch = new L.Control.Search({
 
 map.addControl( controlSearch );
 
-/*
-//TODO : faire une route entre domicile et une gare
-L.Routing.control({
-    waypoints: [
-        L.latLng(48.92078365152306, 2.1846347887831916),
-        L.latLng(48.88731358907528, 2.1715467466022713)
-    ],
-    routeWhileDragging: false
+
+let route = L.Routing.control({
+    createMarker: function() { return null; },
+    draggableWaypoints: false,
+    addWaypoints: false
 }).addTo(map);
-*/
