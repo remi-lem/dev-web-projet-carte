@@ -11,10 +11,11 @@ class MapController Extends AbstractController
     #[Route('/')]
     public function homepage(): Response
     {
+        session_start();
         return $this->render('map/homepage.html.twig', [
             'title' => 'Accueil | GaresÀVous',
             'cssFile' => 'styles/index.css',
-            'address' => $_SESSION['address'] ?? "IUT Paris Rives de Seine" //TODO
+            'address' => $_SESSION['address'] ?? null
         ]);
     }
 

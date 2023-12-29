@@ -64,7 +64,7 @@ while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
 $favouriteStationsTable .= "</tbody></table>";
 
 //mise à jour de l'adresse
-$newAddress = $_SESSION['newAddress'];
+$newAddress = $_SESSION['newAddress'] ?? null;
 if(isset($newAddress) && $newAddress !== ""){
     $_SESSION['newAddress'] = null;
     $sqlUpdateAddress = "UPDATE User U SET U.Address = '$newAddress' WHERE U.Id = $IdUser";
@@ -82,9 +82,11 @@ $sqlAdress = "SELECT U.Address FROM User U WHERE U.Id = $IdUser";
 $resultSqlAdress = $conn->query($sqlAdress);
 while($row = mysqli_fetch_array($resultSqlAdress)) {
     $address = $row['Address'];
+    $_SESSION['address'] = $address;
 }
 if($address == ""){
     $address = "Aucune adresse définie";
+    $_SESSION['address'] = null;
 }
 
 //fermeture de la connection

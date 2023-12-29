@@ -14,7 +14,7 @@
         if(address !== null){
             $.ajax({
                 type: "GET",
-                url: 'https://nominatim.openstreetmap.org/search?layer=address&limit=1&format=json&q=' + address,
+                url: 'https://nominatim.openstreetmap.org/search?layer=address&limit=1&format=json&countrycodes=fr&q=' + address,
                 success: function (data) {
                     if(data.length > 0){
                         const lat = data[0].lat;
