@@ -115,7 +115,7 @@ $conn->close();
             <form action="user_account.php" method="post">
                 <label for="newAddress">Adresse :</label>
                 <input id="newAddress" name="newAddress" type="text" class="form-control" placeholder="<?php echo($address)?>">
-                <button class="btn btn-outline-secondary" type="submit">Modifier</button>
+                <button class="btn btn-outline-secondary" type="submit">Valider</button>
             </form>
         </div>
     </div>

@@ -22,7 +22,7 @@ global $urlstyle;
 
     <script src="konami/autrechose.js"></script>
 
-    <!--bootstrap et leaflet-->
+    <!--dependencies-->
     <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css">
     <script src="dependencies/bootstrap/bootstrap.min.js"></script>
 
