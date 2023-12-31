@@ -4,6 +4,15 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+let boundingBoxString = '[42.261049,-4.855957,51.041394,8.525391]'; //via http://bboxfinder.com
+
+let boundingBox = JSON.parse(boundingBoxString);
+let coord1 = L.latLng(boundingBox[0], boundingBox[1]);
+let coord2 = L.latLng(boundingBox[2], boundingBox[3]);
+let bounds = L.latLngBounds(coord1, coord2);
+
+map.fitBounds(bounds);
+
 const trainIcon = L.icon({
     iconUrl: 'images/marqueurs/train.png',
     iconSize: [26, 32],
