@@ -8,6 +8,49 @@
 <script src="scripts/leaflet.js" defer></script>
 {% endblock %}
 
+{% block homeJS %}
+    <script defer>
+        address = {{ address|json_encode()|raw() }};
+        let latDom;
+        let lonDom;
+        if(address !== null){
+            $.ajax({
+                type: "GET",
+                url: 'https://nominatim.openstreetmap.org/search?layer=address&limit=1&format=json&countrycodes=fr&q=' + address,
+                success: function (data) {
+                    if(data.length > 0){
+                        latDom = data[0].lat;
+                        lonDom = data[0].lon;
+                        L.marker([latDom, lonDom],{icon: houseIcon}).bindPopup("Domicile").addTo(map);
+                        console.log("domicile ajouté");
+                    }
+                    else{
+                        console.error("domicile non trouvé");
+                    }
+                },
+                error: function() {
+                    console.error("Impossible de récupérer les données Nominatim");
+                }
+            });
+        }
+
+        //calcul de la route entre la gare sélectionnée et le domicile
+        function calculateRoute(latSta, lonSta){
+            if(address !== null){
+                route.getPlan().setWaypoints([]);
+                route.setWaypoints([
+                    L.latLng(latDom, lonDom),
+                    L.latLng(latSta, lonSta)
+                ]);
+                route.route();
+            }
+            else {
+                alert("Merci de vous connecter");
+            }
+        }
+    </script>
+{% endblock %}
+
 {% block content %}
     <div id="mapContainer">
         <div id="map"></div>

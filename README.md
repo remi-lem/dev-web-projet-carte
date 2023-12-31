@@ -15,7 +15,7 @@ composer install
 ```
 Pour lancer le serveur web Symfony, lancez la commande :
 ```sh
-symfony serve
+symfony serve --no-tls
 ```
 
 ## Languages utilisés
@@ -30,7 +30,9 @@ Framework PHP : ![Symfony](https://img.shields.io/badge/symfony-%23000000.svg?st
 
 Framework web : ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-Carte : <img src="https://leafletjs.com/docs/images/logo.png" alt="LeafletJS" width="100"/>, avec les modules MarkerCluster et Routing-Machine
+Carte : <img src="https://leafletjs.com/docs/images/logo.png" alt="LeafletJS" width="100"/>, avec les modules MarkerCluster, Routing-Machine et Search
+
+Framework JavaScript : ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white), avec l'utilisation d'Ajax
 
 [<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=0077b6">](https://github.com/SamKirkland/FTP-Deploy-Action)
 
@@ -38,4 +40,10 @@ Hébergement : <img src="https://www.alwaysdata.com/static/svg/alwaysdata-logo-w
 
 IDE : ![PhpStorm](https://img.shields.io/badge/phpstorm-143?style=for-the-badge&logo=phpstorm&logoColor=black&color=black&labelColor=darkorchid)
 
-Travail collaboratif : ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white), ![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white) et ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+Travail collaboratif : ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white),
+![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)
+et ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+
+## Easter Egg
+
+Le konami code a été implémenté, n'hésitez pas à le tester !

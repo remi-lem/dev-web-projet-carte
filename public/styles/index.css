@@ -9,3 +9,7 @@
 .leaflet-control-search .search-tooltip {
     max-height: 250px !important;
 }
+
+.calculItineraire {
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-<div class="flex-container">
+<div class="flex-container flex-wrap">
     <div class="flex-item">
         <h1>Page de connexion</h1>
         <form action="user_account.php" method="post">

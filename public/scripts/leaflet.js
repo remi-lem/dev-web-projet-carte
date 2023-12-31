@@ -1,10 +1,30 @@
-let map = L.map('map', {minZoom: 5}).setView([46.980, 3.779], 6);
+let map = L.map('map', {minZoom: 5}).setView([46.603354, 1.8883335], 6);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+let boundingBoxString = '[42.261049,-4.855957,51.041394,8.525391]'; //via http://bboxfinder.com
+
+let boundingBox = JSON.parse(boundingBoxString);
+let coord1 = L.latLng(boundingBox[0], boundingBox[1]);
+let coord2 = L.latLng(boundingBox[2], boundingBox[3]);
+let bounds = L.latLngBounds(coord1, coord2);
+
+map.fitBounds(bounds);
 
 const trainIcon = L.icon({
     iconUrl: 'images/marqueurs/train.png',
     iconSize: [26, 32],
+    iconAnchor: [13, 32],
+    popupAnchor: [0, -29]
+});
+
+const houseIcon = L.icon({
+    iconUrl: 'images/marqueurs/house.png',
+    iconSize: [26, 38],
+    iconAnchor: [13, 38],
+    popupAnchor: [0, -34]
 });
 
 const markers = L.markerClusterGroup();
@@ -45,7 +65,8 @@ fetch("data/liste-des-gares.geojson")
                 layer.bindPopup('<b>' + feature.properties.libelle + '</b><br>' +
                     feature.properties.commune + ", " + feature.properties.departemen + '<br>' +
                     FretOrVoyageurs(feature) + '<br>' +
-                    "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>"
+                    "<a href='user_account.php?addFavId=" + feature.properties.code_uic + "'>Marquer comme favori</a>" + '<br>' +
+                    `<a class='calculItineraire' onclick='calculateRoute(${feature.properties.c_geo.lat}, ${feature.properties.c_geo.lon})'>Calculer l'itinéraire</a>`
                 );
             }
         }).addTo(markers);
@@ -81,13 +102,9 @@ let controlSearch = new L.Control.Search({
 
 map.addControl( controlSearch );
 
-/*
-//TODO : avancer sur l'automatisation des routes + obliger a passer par les voies de chemin de fer
-L.Routing.control({
-    waypoints: [
-        L.latLng(48.92078365152306, 2.1846347887831916),
-        L.latLng(48.88731358907528, 2.1715467466022713)
-    ],
-    routeWhileDragging: false
+
+let route = L.Routing.control({
+    createMarker: function() { return null; },
+    draggableWaypoints: false,
+    addWaypoints: false
 }).addTo(map);
-*/
