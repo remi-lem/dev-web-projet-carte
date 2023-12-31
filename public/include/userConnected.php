@@ -41,6 +41,8 @@ while($row = mysqli_fetch_array($resultSqlUserName)) {
     $name = $row['Name'];
 }
 
+$_SESSION['Name'] = $name;
+
 //construction du tableau des gares favorites
 $sqlFavouriteStations = $conn->prepare("SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = ?");
 $sqlFavouriteStations->bind_param("i", $IdUser);
