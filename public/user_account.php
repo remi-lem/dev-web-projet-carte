@@ -5,12 +5,12 @@ require_once("include/header.php");
 
 session_start();
 
-/*
+
 //uncomment only for debugging
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-*/
+
 
 $envFilePath = __DIR__ . '/.env';
 $envContent = file_get_contents($envFilePath);
@@ -39,11 +39,13 @@ if(isset($_GET['logout'])){
 
 if(isset($_GET['delete-account'])){
     $usernameDel = $_SESSION['Username'];
-    $delFavStation = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdUser = (SELECT User.Id FROM User WHERE User.Surname = '$usernameDel')";
-    $delAccount = "DELETE FROM User WHERE User.Id = (SELECT User.Id FROM User WHERE User.Surname = '$usernameDel')";
+    $delFavStation = $conn->prepare("DELETE FROM FavouriteStations WHERE FavouriteStations.IdUser = (SELECT User.Id FROM User WHERE User.Surname = ?)");
+    $delAccount = $conn->prepare("DELETE FROM User WHERE User.Id = (SELECT User.Id FROM User WHERE User.Surname = ?)");
     try {
-        $conn->query($delFavStation);
-        $conn->query($delAccount);
+        $delFavStation->bind_param("s", $usernameDel);
+        $delFavStation->execute();
+        $delAccount->bind_param("s", $usernameDel);
+        $delAccount->execute();
         echo("<p class='alert alert-success'>Compte supprimé avec succès</p>");
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Impossible de supprimer ce compte</p>");
@@ -75,9 +77,10 @@ $username = $_SESSION['Username'] ?? null;
 $password = $_SESSION['Password'] ?? null;
 
 if(isset($name)){
-    $addAccount = "INSERT INTO User(Name, Surname, Password) VALUES ('$name', '$username', '$password')";
+    $addAccount = $conn->prepare("INSERT INTO User(Name, Surname, Password) VALUES (?, ?, ?)");
     try {
-        $result = $conn->query($addAccount);
+        $addAccount->bind_param("sss", $name, $username, $password);
+        $addAccount->execute();
         echo("<p class='alert alert-success'>Utilisateur crée ! Vous pouvez vous connecter</p>");
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Cet utilisateur existe déjà. Merci de choisir un nom/pseudo différent.</p>");
@@ -85,11 +88,15 @@ if(isset($name)){
     require_once("include/connection.php");
 }
 else {
-    $query = "SELECT U.Id, U.Name, U.Surname, U.Password FROM User U WHERE U.Surname = '$username' AND U.Password = '$password'";
-    $result = $conn->query($query);
+    $login = $conn->prepare("SELECT U.Id, U.Name, U.Surname, U.Password FROM User U WHERE U.Surname = ? AND U.Password = ?");
+    $login->bind_param("ss", $username, $password);
+    $login->execute();
+    $result = $login->get_result();
 
     if ($result->num_rows > 0) {
-        $IdUser = mysqli_fetch_array($result)['Id'];
+        while($row = mysqli_fetch_array($result)) {
+            $IdUser = $row['Id'];
+        }
         require_once("include/userConnected.php");
     } else {
         if(isset($username)){

@@ -7,9 +7,10 @@ $removeFavId = $_SESSION['removeFavId'] ?? null;
 
 //ajout de gare favorite
 if(isset($newFavId)){
-    $sqlAddFavId = "INSERT INTO FavouriteStations(IdUser, IdStation) VALUES ($IdUser, $newFavId)";
+    $sqlAddFavId = $conn->prepare("INSERT INTO FavouriteStations(IdUser, IdStation) VALUES (?, ?)");
     try{
-        $conn->query($sqlAddFavId);
+        $sqlAddFavId->bind_param("ii", $IdUser, $newFavId);
+        $sqlAddFavId->execute();
         $_SESSION['newFavId'] = null;
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Cette gare a déja été ajoutée.</p>");
@@ -19,9 +20,10 @@ if(isset($newFavId)){
 
 //supression de gare favorite
 if(isset($removeFavId)){
-    $sqlRmFavId = "DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = $removeFavId AND FavouriteStations.IdUser = $IdUser";
+    $sqlRmFavId = $conn->prepare("DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = ? AND FavouriteStations.IdUser = ?");
     try{
-        $conn->query($sqlRmFavId);
+        $sqlRmFavId->bind_param("ii", $removeFavId, $IdUser);
+        $sqlRmFavId->execute();
         $_SESSION['removeFavId'] = null;
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Impossible de supprimer cette gare</p>");
@@ -30,16 +32,20 @@ if(isset($removeFavId)){
 }
 
 //récupération du nom d'utilisateur
-$sqlUserName = "SELECT U.Name FROM User U WHERE U.Id = $IdUser";
-$resultSqlUserName = $conn->query($sqlUserName);
+$sqlUserName = $conn->prepare("SELECT U.Name FROM User U WHERE U.Id = ?");
+$sqlUserName->bind_param("i", $IdUser);
+$sqlUserName->execute();
+$resultSqlUserName = $sqlUserName->get_result();
 
 while($row = mysqli_fetch_array($resultSqlUserName)) {
     $name = $row['Name'];
 }
 
 //construction du tableau des gares favorites
-$sqlFavouriteStations = "SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = $IdUser";
-$resultSqlFavouriteStations = $conn->query($sqlFavouriteStations);
+$sqlFavouriteStations = $conn->prepare("SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = ?");
+$sqlFavouriteStations->bind_param("i", $IdUser);
+$sqlFavouriteStations->execute();
+$resultSqlFavouriteStations = $sqlFavouriteStations->get_result();
 
 $favouriteStationsTable = '<table class="table"><thead><tr><th scope="col">Nom de la station</th><th scope="col">Supression</th><th scope="col">Voir les prochains départs</th></tr></thead><tbody>';
 
@@ -51,7 +57,7 @@ while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
     foreach ($geojson['features'] as $feature) {
         $properties = $feature['properties'];
         $code_uic = $properties['code_uic'];
-        if ($code_uic === $row["IdStation"]) {
+        if ($code_uic == $row["IdStation"]) {
             $stationShowName = $properties['libelle'];
             break;
         }
@@ -67,9 +73,10 @@ $favouriteStationsTable .= "</tbody></table>";
 $newAddress = $_SESSION['newAddress'] ?? null;
 if(isset($newAddress) && $newAddress !== ""){
     $_SESSION['newAddress'] = null;
-    $sqlUpdateAddress = "UPDATE User U SET U.Address = '$newAddress' WHERE U.Id = $IdUser";
+    $sqlUpdateAddress = $conn->prepare("UPDATE User U SET U.Address = ? WHERE U.Id = ?");
     try {
-        $result = $conn->query($sqlUpdateAddress);
+        $sqlUpdateAddress->bind_param("si", $newAddress, $IdUser);
+        $sqlUpdateAddress->execute();
         echo("<p class='alert alert-success'>Adresse modifiée !</p>");
     } catch (mysqli_sql_exception $e){
         echo("<p class='alert alert-danger'>Impossible de mettre a jour l'adresse.</p>");
@@ -78,8 +85,10 @@ if(isset($newAddress) && $newAddress !== ""){
 
 //récupération de l'adresse de l'utilisateur
 $address = "";
-$sqlAdress = "SELECT U.Address FROM User U WHERE U.Id = $IdUser";
-$resultSqlAdress = $conn->query($sqlAdress);
+$sqlAdress = $conn->prepare("SELECT U.Address FROM User U WHERE U.Id = ?");
+$sqlAdress->bind_param("i", $IdUser);
+$sqlAdress->execute();
+$resultSqlAdress = $sqlAdress->get_result();
 while($row = mysqli_fetch_array($resultSqlAdress)) {
     $address = $row['Address'];
     $_SESSION['address'] = $address;
