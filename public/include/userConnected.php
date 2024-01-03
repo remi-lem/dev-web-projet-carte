@@ -7,7 +7,7 @@ $removeFavId = $_SESSION['removeFavId'] ?? null;
 
 //ajout de gare favorite
 if(isset($newFavId)){
-    $sqlAddFavId = $conn->prepare("INSERT INTO FavouriteStations(IdUser, IdStation) VALUES (?, ?)");
+    $sqlAddFavId = $conn->prepare("INSERT INTO favourite_stations(id_user_id, id_station) VALUES (?, ?)");
     try{
         $sqlAddFavId->bind_param("ii", $IdUser, $newFavId);
         $sqlAddFavId->execute();
@@ -20,7 +20,7 @@ if(isset($newFavId)){
 
 //supression de gare favorite
 if(isset($removeFavId)){
-    $sqlRmFavId = $conn->prepare("DELETE FROM FavouriteStations WHERE FavouriteStations.IdStation = ? AND FavouriteStations.IdUser = ?");
+    $sqlRmFavId = $conn->prepare("DELETE FROM favourite_stations WHERE favourite_stations.id_station = ? AND favourite_stations.id_user_id = ?");
     try{
         $sqlRmFavId->bind_param("ii", $removeFavId, $IdUser);
         $sqlRmFavId->execute();
@@ -32,7 +32,7 @@ if(isset($removeFavId)){
 }
 
 //récupération du nom d'utilisateur
-$sqlUserName = $conn->prepare("SELECT U.Name FROM User U WHERE U.Id = ?");
+$sqlUserName = $conn->prepare("SELECT U.Name FROM user U WHERE U.Id = ?");
 $sqlUserName->bind_param("i", $IdUser);
 $sqlUserName->execute();
 $resultSqlUserName = $sqlUserName->get_result();
@@ -44,7 +44,7 @@ while($row = mysqli_fetch_array($resultSqlUserName)) {
 $_SESSION['Name'] = $name;
 
 //construction du tableau des gares favorites
-$sqlFavouriteStations = $conn->prepare("SELECT F.IdStation FROM FavouriteStations F WHERE F.IdUser = ?");
+$sqlFavouriteStations = $conn->prepare("SELECT F.id_station FROM favourite_stations F WHERE F.id_user_id = ?");
 $sqlFavouriteStations->bind_param("i", $IdUser);
 $sqlFavouriteStations->execute();
 $resultSqlFavouriteStations = $sqlFavouriteStations->get_result();
@@ -55,18 +55,18 @@ $geojson_data = file_get_contents("data/liste-des-gares.geojson");
 $geojson = json_decode($geojson_data, true);
 
 while($row = mysqli_fetch_array($resultSqlFavouriteStations)) {
-    $stationShowName = $row["IdStation"];
+    $stationShowName = $row["id_station"];
     foreach ($geojson['features'] as $feature) {
         $properties = $feature['properties'];
         $code_uic = $properties['code_uic'];
-        if ($code_uic == $row["IdStation"]) {
+        if ($code_uic == $row["id_station"]) {
             $stationShowName = $properties['libelle'];
             break;
         }
     }
-    $getNextDeparturesURL = "https://www.sncf.com/fr/gares/details/OCE" . $row["IdStation"] . "/departs-arrivees/gl/departs";
+    $getNextDeparturesURL = "https://www.sncf.com/fr/gares/details/OCE" . $row["id_station"] . "/departs-arrivees/gl/departs";
     $favouriteStationsTable .= "<tr><td>" . $stationShowName . "</td><td><a href='user_account.php?removeFavId=" .
-        $row["IdStation"] . "'>Supprimer</a></td><td><a href='$getNextDeparturesURL' target='_blank'>Prochains départs</a></td></tr>";
+        $row["id_station"] . "'>Supprimer</a></td><td><a href='$getNextDeparturesURL' target='_blank'>Prochains départs</a></td></tr>";
 }
 
 $favouriteStationsTable .= "</tbody></table>";
@@ -75,7 +75,7 @@ $favouriteStationsTable .= "</tbody></table>";
 $newAddress = $_SESSION['newAddress'] ?? null;
 if(isset($newAddress) && $newAddress !== ""){
     $_SESSION['newAddress'] = null;
-    $sqlUpdateAddress = $conn->prepare("UPDATE User U SET U.Address = ? WHERE U.Id = ?");
+    $sqlUpdateAddress = $conn->prepare("UPDATE user U SET U.Address = ? WHERE U.Id = ?");
     try {
         $sqlUpdateAddress->bind_param("si", $newAddress, $IdUser);
         $sqlUpdateAddress->execute();
@@ -87,7 +87,7 @@ if(isset($newAddress) && $newAddress !== ""){
 
 //récupération de l'adresse de l'utilisateur
 $address = "";
-$sqlAdress = $conn->prepare("SELECT U.Address FROM User U WHERE U.Id = ?");
+$sqlAdress = $conn->prepare("SELECT U.Address FROM user U WHERE U.Id = ?");
 $sqlAdress->bind_param("i", $IdUser);
 $sqlAdress->execute();
 $resultSqlAdress = $sqlAdress->get_result();
