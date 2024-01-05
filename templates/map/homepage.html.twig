@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('scripts/leaflet.js') }}" defer></script>
+<script src="{{ asset('scripts/leaflet.js') }}" defer></script>
     <script src="{{ asset('scripts/jqueryui.js') }}" defer></script>
 {% endblock %}
 
@@ -60,41 +60,43 @@
     <div id="mapContainer" class="droppable">
         <div id="map"></div>
     </div>
-    <div class="conteneur">
-        <div class="ville un draggable">Paris
-            <img src="{{ asset('images/iconesVille/paris.png') }}" alt="Tour Eiffel">
+    <div class="conteneur container">
+        <div class="row">
+            <div class="col mx-lg-2 ville draggable">Paris
+                <img src="{{ asset('images/iconesVille/paris.png') }}" alt="Tour Eiffel">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Marseille
+                <img src="{{ asset('images/iconesVille/marseille.png') }}" alt="Ville">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Lyon
+                <img src="{{ asset('images/iconesVille/lyon.png') }}" alt="Lion">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Toulouse
+                <img src="{{ asset('images/iconesVille/toulouse.png') }}" alt="Ballon de rugby">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Nice
+                <img src="{{ asset('images/iconesVille/nice.png') }}" alt="Parasol">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Nantes
+                <img src="{{ asset('images/iconesVille/nantes.png') }}" alt="Hermine">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Montpellier
+                <img src="{{ asset('images/iconesVille/montpellier.png') }}" alt="Statue">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Strasbourg
+                <img src="{{ asset('images/iconesVille/strasbourg.png') }}" alt="Bretzel">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Bordeaux
+                <img src="{{ asset('images/iconesVille/bordeaux.png') }}" alt="Vin">
+            </div>
+            <div class="col mx-lg-2 ville draggable">Lille
+                <img src="{{ asset('images/iconesVille/lille.png') }}" alt="Wagon">
+            </div>
+            {% if address != null %}
+                <div class="col mx-lg-2 ville draggable">{{ address }}
+                    <img src="{{ asset('images/iconesVille/domicile.png') }}" alt="Maison">
+                </div>
+            {% endif %}
         </div>
-        <div class="ville draggable">Marseille
-            <img src="{{ asset('images/iconesVille/marseille.png') }}" alt="Ville">
-        </div>
-        <div class="ville draggable">Lyon
-            <img src="{{ asset('images/iconesVille/lyon.png') }}" alt="Lion">
-        </div>
-        <div class="ville draggable">Toulouse
-            <img src="{{ asset('images/iconesVille/toulouse.png') }}" alt="Ballon de rugby">
-        </div>
-        <div class="ville draggable">Nice
-            <img src="{{ asset('images/iconesVille/nice.png') }}" alt="Parasol">
-        </div>
-        <div class="ville draggable">Nantes
-            <img src="{{ asset('images/iconesVille/nantes.png') }}" alt="Hermine">
-        </div>
-        <div class="ville draggable">Montpellier
-            <img src="{{ asset('images/iconesVille/montpellier.png') }}" alt="Statue">
-        </div>
-        <div class="ville draggable">Strasbourg
-            <img src="{{ asset('images/iconesVille/strasbourg.png') }}" alt="Bretzel">
-        </div>
-        <div class="ville draggable">Bordeaux
-            <img src="{{ asset('images/iconesVille/bordeaux.png') }}" alt="Vin">
-        </div>
-        <div class="ville draggable">Lille
-            <img src="{{ asset('images/iconesVille/lille.png') }}" alt="Wagon">
-        </div>
-        {% if address != null %}
-        <div class="ville draggable">{{ address }}
-            <img src="{{ asset('images/iconesVille/domicile.png') }}" alt="Maison">
-        </div>
-        {% endif %}
     </div>
 {% endblock %}
