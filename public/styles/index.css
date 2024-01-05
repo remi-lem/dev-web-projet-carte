@@ -1,6 +1,5 @@
 #map {
     height: 85vh;
-    z-index: -1;
 }
 
 .conteneur {
@@ -12,6 +11,7 @@
 }
 
 .ville {
+    z-index: 10001;
     width: 100px;
     height: 100px;
     display: flex;

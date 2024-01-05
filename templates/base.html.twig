@@ -7,8 +7,6 @@
 
     <link href="{{ asset("styles/global.css") }}" rel="stylesheet" type="text/css">
     <link href="{{ cssFile }}" rel="stylesheet">
-    {% block css %}
-    {% endblock %}
     <link rel="icon" href="{{ asset("images/logos/logoSite.png") }}">
 
     <script src="{{ asset("konami/autrechose.js") }}"></script>
@@ -20,7 +18,9 @@
     <script src="{{ asset('dependencies/bootstrap/bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('dependencies/jquery/jquery-3.7.1.min.js') }}"></script>
-    {% block dependencies %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ asset('dependencies/jquery-ui/jquery-ui.min.css') }}">
+    <script src="{{ asset('dependencies/jquery-ui/jquery-ui.min.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('dependencies/leaflet/leaflet.css') }}">
     <script src="{{ asset('dependencies/leaflet/leaflet.js') }}"></script>

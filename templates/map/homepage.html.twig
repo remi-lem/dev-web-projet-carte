@@ -4,17 +4,9 @@
     {{ title }}
 {% endblock %}
 
-{% block css %}
-    <link rel="stylesheet" href="{{ asset('dependencies/jquery-ui/jquery-ui.min.css') }}" type="text/css">
-{% endblock %}
-
-{% block dependencies %}
-    <script src="dependencies/jquery-ui/jquery-ui.min.js"></script>
-{% endblock %}
-
-{% block javascript %} {# TODO : passer les scripts en asset #}
-    <script src="scripts/leaflet.js" defer></script>
-
+{% block javascript %}
+    <script src="{{ asset('scripts/leaflet.js') }}" defer></script>
+    <script src="{{ asset('scripts/jqueryui.js') }}" defer></script>
 {% endblock %}
 
 {% block homeJS %}
