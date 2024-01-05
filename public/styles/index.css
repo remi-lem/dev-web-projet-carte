@@ -1,5 +1,33 @@
 #map {
     height: 85vh;
+    z-index: -1;
+}
+
+.conteneur {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.ville {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    background-color: lightgrey;
+    flex-direction: column;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid;
+    user-select: none;
+}
+
+.ville img {
+    width: 68%;
 }
 
 .leaflet-control-search .search-input, .leaflet-control-search .search-tooltip .search-tip {

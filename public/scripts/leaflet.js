@@ -4,6 +4,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+
 let boundingBoxString = '[42.261049,-4.855957,51.041394,8.525391]'; //via http://bboxfinder.com
 
 let boundingBox = JSON.parse(boundingBoxString);
@@ -110,3 +111,30 @@ let route = L.Routing.control({
     language: 'fr',
     show : false
 }).addTo(map);
+
+//---------------JQUERY-UI---------------
+$( function() {
+    $( ".draggable" ).draggable({ revert: true });
+} );
+
+$( function() {
+    $( ".draggable" ).draggable();
+    $( ".droppable" ).droppable({
+        drop: function( event, ui ) {
+            $.ajax({
+                url: "https://nominatim.openstreetmap.org/search?format=json&q=" + ui.helper.text(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.length > 0) {
+                        const latitude = data[0].lat;
+                        const longitude = data[0].lon;
+                        $('.coordonnees p').text("[" + latitude + " ; " + longitude + "]");
+                        map.setView([latitude, longitude], 13);
+                    }
+                }
+            });
+        }
+    });
+} );
+//---------------END-JQUERY-UI---------------
