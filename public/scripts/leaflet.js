@@ -106,5 +106,7 @@ map.addControl( controlSearch );
 let route = L.Routing.control({
     createMarker: function() { return null; },
     draggableWaypoints: false,
-    addWaypoints: false
+    addWaypoints: false,
+    language: 'fr',
+    show : false
 }).addTo(map);

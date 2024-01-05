@@ -22,7 +22,7 @@ global $urlstyle;
 
     <script src="konami/autrechose.js"></script>
 
-    <!--bootstrap et leaflet-->
+    <!--dependencies-->
     <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css">
     <script src="dependencies/bootstrap/bootstrap.min.js"></script>
 
@@ -34,8 +34,10 @@ global $urlstyle;
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">
             <img src="images/logos/logoSite.png" alt="Logo" width="60" height="60">
-            GaresÀVous!
+            GaresÀVous! | Accueil
         </a>
-        <a href="user_account.php"><img id="logoAccount" alt="userAccount" src="images/logos/user.png" width="40" height="40"></a>
+        <a class="navbar-brand" href="user_account.php"><?php echo $_SESSION['Name'] ?? "Compte" ?>
+            <img id="logoAccount" alt="userAccount" src="images/logos/user.png" width="40" height="40">
+        </a>
     </div>
 </nav>

@@ -2,3 +2,8 @@
     Order Allow,Deny
     Deny from all
 </Files>
+
+<FilesMatch "\.(geojson)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 2 month"
+</FilesMatch>

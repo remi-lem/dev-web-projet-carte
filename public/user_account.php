@@ -1,16 +1,17 @@
 <?php
+
+session_start();
+
 $titre = "Compte | GareÀVous";
 $urlstyle = "styles/account.css";
 require_once("include/header.php");
 
-session_start();
-
-
+/*
 //uncomment only for debugging
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
+*/
 
 $envFilePath = __DIR__ . '/.env';
 $envContent = file_get_contents($envFilePath);
@@ -39,8 +40,8 @@ if(isset($_GET['logout'])){
 
 if(isset($_GET['delete-account'])){
     $usernameDel = $_SESSION['Username'];
-    $delFavStation = $conn->prepare("DELETE FROM FavouriteStations WHERE FavouriteStations.IdUser = (SELECT User.Id FROM User WHERE User.Surname = ?)");
-    $delAccount = $conn->prepare("DELETE FROM User WHERE User.Id = (SELECT User.Id FROM User WHERE User.Surname = ?)");
+    $delFavStation = $conn->prepare("DELETE FROM favourite_stations WHERE favourite_stations.id_user_id = (SELECT U.Id FROM user U WHERE U.Surname = ?)");
+    $delAccount = $conn->prepare("DELETE FROM user U WHERE U.Id = (SELECT U2.Id FROM user U2 WHERE U2.Surname = ?)");
     try {
         $delFavStation->bind_param("s", $usernameDel);
         $delFavStation->execute();
@@ -77,7 +78,7 @@ $username = $_SESSION['Username'] ?? null;
 $password = $_SESSION['Password'] ?? null;
 
 if(isset($name)){
-    $addAccount = $conn->prepare("INSERT INTO User(Name, Surname, Password) VALUES (?, ?, ?)");
+    $addAccount = $conn->prepare("INSERT INTO user(Name, Surname, Password) VALUES (?, ?, ?)");
     try {
         $addAccount->bind_param("sss", $name, $username, $password);
         $addAccount->execute();
@@ -88,7 +89,7 @@ if(isset($name)){
     require_once("include/connection.php");
 }
 else {
-    $login = $conn->prepare("SELECT U.Id, U.Name, U.Surname, U.Password FROM User U WHERE U.Surname = ? AND U.Password = ?");
+    $login = $conn->prepare("SELECT U.Id, U.Name, U.Surname, U.Password FROM user U WHERE U.Surname = ? AND U.Password = ?");
     $login->bind_param("ss", $username, $password);
     $login->execute();
     $result = $login->get_result();
