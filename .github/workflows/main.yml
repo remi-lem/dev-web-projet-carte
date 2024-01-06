@@ -25,3 +25,12 @@ jobs:
           **/.git*/**
           **/vendor/**
           **/var/**
+          **/bin/**
+          **/config/**
+          **/composer.*
+          **/symfony.*
+          **/public/index.php
+          **/src/Kernel.php
+          **/src/Entity/**
+          **/src/Repository/**
+          
