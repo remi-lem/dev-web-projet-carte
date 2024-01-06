@@ -2,7 +2,7 @@
 
 session_start();
 
-$titre = "Compte | GareÀVous";
+$titre = "GareÀVous | Compte";
 $urlstyle = "styles/account.css";
 require_once("include/header.php");
 

@@ -13,7 +13,7 @@ class MapController Extends AbstractController
     {
         session_start();
         return $this->render('map/homepage.html.twig', [
-            'title' => 'Accueil | GaresÀVous',
+            'title' => 'GaresÀVous | Accueil',
             'cssFile' => 'styles/index.css',
             'address' => $_SESSION['address'] ?? null,
             'name' => $_SESSION['Name'] ?? "Compte"
@@ -24,7 +24,7 @@ class MapController Extends AbstractController
     public function konami():Response
     {
         return $this->render('map/konami.html.twig', [
-            'title' => 'Konami | GaresÀVous',
+            'title' => 'GaresÀVous | Konami',
             'cssFile' => 'konami/konami.css'
         ]);
     }
