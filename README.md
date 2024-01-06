@@ -32,7 +32,8 @@ Framework web : ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.sv
 
 Carte : <img src="https://leafletjs.com/docs/images/logo.png" alt="LeafletJS" width="100"/>, avec les modules MarkerCluster, Routing-Machine et Search
 
-Framework JavaScript : ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white), avec l'utilisation d'Ajax
+Framework JavaScript : ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white), avec l'utilisation d'Ajax, ainsi que 
+<img src="https://jqueryui.com/wp-content/themes/jquery/images/logo-jquery-ui.png" alt="JQueryUI" width="100"/>
 
 [<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=0077b6">](https://github.com/SamKirkland/FTP-Deploy-Action)
 
@@ -46,4 +47,4 @@ et ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-b
 
 ## Easter Egg
 
-Le konami code a été implémenté, n'hésitez pas à le tester !
+Le [Konami Code](https://fr.wikipedia.org/wiki/Code_Konami) a été implémenté, n'hésitez pas à le tester !
