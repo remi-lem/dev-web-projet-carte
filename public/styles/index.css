@@ -2,6 +2,11 @@
     height: 85vh;
 }
 
+#importantCities {
+    text-align: center;
+    margin-top: 1rem;
+}
+
 .conteneur {
     margin-top: 3%;
     margin-bottom: 1%;
