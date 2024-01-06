@@ -25,7 +25,9 @@ class MapController Extends AbstractController
     {
         return $this->render('map/konami.html.twig', [
             'title' => 'GaresÀVous | Konami',
-            'cssFile' => 'konami/konami.css'
+            'cssFile' => 'konami/konami.css',
+            'address' => $_SESSION['address'] ?? null,
+            'name' => $_SESSION['Name'] ?? "Compte"
         ]);
     }
 }
