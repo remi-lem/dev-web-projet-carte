@@ -110,3 +110,20 @@ let route = L.Routing.control({
     language: 'fr',
     show : false
 }).addTo(map);
+
+
+//légende
+let legend = L.control({ position: 'bottomleft' });
+
+legend.onAdd = function (map) {
+    let div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = '<h4>Légende :</h4>' +
+        '<p>Tracés bleus : chemins de fer<br>' +
+        'Tracé rouge : itinéraire calculé</p>';
+    div.style.backgroundColor = 'white';
+    div.style.padding = '10px';
+    div.style.borderRadius = '8px';
+    return div;
+};
+
+legend.addTo(map);
