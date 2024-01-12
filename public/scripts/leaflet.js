@@ -1,8 +1,6 @@
 let map = L.map('map', {minZoom: 5}).setView([46.603354, 1.8883335], 6);
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+L.tileLayer('https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=28e1814f28044740b3c2212149ce0b95').addTo(map);
 
 let boundingBoxString = '[42.261049,-4.855957,51.041394,8.525391]'; //via http://bboxfinder.com
 
